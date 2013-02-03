@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Gamified table:</b>
+  <%= @trumpet.gamified_table %>
+</p>
+
+<p>
+  <b>Gamified:</b>
+  <%= @trumpet.gamified_id %>
+</p>
+
+<p>
+  <b>Trumpet points:</b>
+  <%= @trumpet.trumpet_points %>
+</p>
+
+
+<%= link_to 'Edit', edit_trumpet_path(@trumpet) %> |
+<%= link_to 'Back', trumpets_path %>

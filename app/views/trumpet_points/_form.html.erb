@@ -1,0 +1,33 @@
+<%= form_for(@trumpet_point) do |f| %>
+  <% if @trumpet_point.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@trumpet_point.errors.count, "error") %> prohibited this trumpet_point from being saved:</h2>
+
+      <ul>
+      <% @trumpet_point.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :count %><br />
+    <%= f.number_field :count %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :acts_as_level %><br />
+    <%= f.check_box :acts_as_level %>
+  </div>
+  <div class="field">
+    <%= f.label :acts_as_acheivement %><br />
+    <%= f.check_box :acts_as_acheivement %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,27 @@
+<h1>Listing trumpets</h1>
+
+<table>
+  <tr>
+    <th>Gamified table</th>
+    <th>Gamified</th>
+    <th>Trumpet points</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @trumpets.each do |trumpet| %>
+  <tr>
+    <td><%= trumpet.gamified_table %></td>
+    <td><%= trumpet.gamified_id %></td>
+    <td><%= trumpet.trumpet_points %></td>
+    <td><%= link_to 'Show', trumpet %></td>
+    <td><%= link_to 'Edit', edit_trumpet_path(trumpet) %></td>
+    <td><%= link_to 'Destroy', trumpet, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Trumpet', new_trumpet_path %>
