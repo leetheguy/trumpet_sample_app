@@ -1,6 +1,11 @@
 class User < ActiveRecord::Base
-  attr_accessor :trumpet_points, :trumpet_levels, :trumpet_achievements, :rules
+  attr_accessor :trumpet_points, :trumpet_levels, :trumpet_achievements, :rules, :rule_sheet
   attr_accessible :name
+  after_initialize :assign_rule_sheet
+
+  def assign_rule_sheet
+    @rule_sheet = TrumpetRuleSheet.new
+  end
 
   def toot_listener(type, &block)
 
@@ -9,27 +14,6 @@ class User < ActiveRecord::Base
   def toot(message)
 
   end
- #Namifier methods
-
-#   def simplify_name(name)
-
-
-#   end
-
-#   def levelify_name(name)
-
-
-#   end
-
-#   def pointify_name(name)
-
-
-#   end
-
-#   def achievementify_name(name)
-
-
-#   end
 
 #Point/level/achievement status methods
 
@@ -37,6 +21,13 @@ class User < ActiveRecord::Base
     points = User.find_or_create_points(type)
     points.total += value
     points.save
+    rules_levels = rule_sheet.trumpet_levels[type]
+    if rules_levels
+      level = User.find_or_create_level(type)
+      ttl = rules_levels.find_index{ |l| points.total < l }
+      level.total = ttl || rules_levels.count
+      level.save
+    end
     points.total
   end
 
@@ -52,15 +43,18 @@ class User < ActiveRecord::Base
   end
 
   def current_level(type)
-
+    User.find_or_create_level(type).total
   end
 
   def award_achievement(type)
-
+    a = User.find_or_create_achievement(type)
+    a.total = 1
+    a.save
+    self.has_achievement?(type)
   end
 
   def has_achievement?(type)
-
+    User.find_or_create_achievement(type).total == 1
   end
 
 # #SUMMARY METHODS

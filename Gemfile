@@ -21,11 +21,23 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-group :development do
+group :development, :test do
   gem 'pry'
+  gem 'guard'
+# events for mac
+#  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+# events for linux
+  gem 'rb-inotify', '~> 0.8.8', :require => false
+  gem 'guard-test'
+  gem 'libnotify'
+  gem 'guard-livereload'
+  gem 'rack-livereload'
+#  gem 'ruby-gntp'
 end
 
 gem 'jquery-rails'
+gem 'therubyracer', :platforms => :ruby
+gem 'execjs'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -5,6 +5,10 @@ class UserTest < ActiveSupport::TestCase
 
 #Point/level/achievement status methods
 
+#  test "test fails" do
+#    assert_equal false, true
+#  end
+
   test "user exists" do
     user = User.first
     assert user
@@ -27,6 +31,11 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 0, user.current_points(:test)
   end
 
+  test "can get user.current_level" do
+    user = User.first
+    assert_equal 0, user.current_level(:test)
+  end
+
   test "can automatically assign and increase user points" do
     user = User.first
     points = user.current_points(:test)
@@ -41,13 +50,13 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 2, user.current_points(:test)
   end
 
-  #test "trumpet_points, trumpet_level, trumpet_achievement should be hashes" do
-    # user = User.new
-    # tl = user.trumpet_levels
-    # ta = user.trumpet_achievements
-    # assert tl.is_a?(Hash)
-    # assert ta.is_a?(Hash)
-  #end
+#  test "trumpet_points, trumpet_level, trumpet_achievement should be hashes" do
+#    user = User.new
+#    tl = user.trumpet_levels
+#    ta = user.trumpet_achievements
+#    assert tl.is_a?(Hash)
+#    assert ta.is_a?(Hash)
+#  end
 
   test "can declare level structures" do
     rules = TrumpetRuleSheet.new
@@ -61,78 +70,56 @@ class UserTest < ActiveSupport::TestCase
     assert rules.trumpet_achievements.length > 0
   end
 
- # test "can automatically assign and increase user points and levels by increasing points" do
- #   user.increase_points(:test, 10)
- #   levelify_threshold[1] = 19
- #   user.increase_points(20)
- #   assert_equal user.level, 2
- # end
+#  test "can automatically assign and increase user points" do
+#    user = User.first
+#    points = user.current_points(:test)
+#    user.increase_points(3, :test)
+#    assert_equal points + 3, user.current_points(:test)
+#  end
 
-#   test "can assign achievement and check for achievement with award_acheivement and has_acheivement" do
-# user = User.first
-#     user.award_achievement(:test_badger)
-#     assert_equal user.has_achievement?(:test_badger), true
-#   end
+  test "can automatically assign and increase user points and levels by increasing points" do
+    user = User.first
+    user.rule_sheet.declare_level(:test, [20])
+    user.increase_points(10, :test)
+    assert_equal 0, user.current_level(:test)
+    user.increase_points(20, :test)
+    assert_equal 1, user.current_level(:test)
+  end
+
+#  test "can automatically assign and increase user points and achievements by increasing points" do
+#    user = User.first
+#    user.rule_sheet.declare_level(:test, [20])
+#    user.increase_points(10, :test)
+#    assert_equal 0, user.current_level(:test)
+#    user.increase_points(20, :test)
+#    assert_equal 1, user.current_level(:test)
+#  end
+#
+  test "can assign achievement with award_acheivement" do
+    user = User.first
+    assert user.award_achievement(:test_badger)
+  end
+
+  test "can check for achievement with has_acheivement" do
+    user = User.first
+    user.award_achievement(:test_badger)
+    assert user.has_achievement?(:test_badger)
+  end
+
+  test "has_achievement should return false if it hasn't been created" do
+    user = User.first
+    assert !user.has_achievement?(:test)
+  end
+
+#  test "only declared levels are auto-incremented" do
+#  end
+
+#  test "only declared achievements are auto-incremented" do
+#  end
 
 #   # test "trumpeted model class can hold a hash of declared achievements" do
 #   #   trumpet_model
 #   # end
-
-# # Namify methods
-#   test "simplify_name should strip a level name" do
-# user = User.first
-#     level = :test
-
-#     assert_equal user.simplify_name(level), :test
-#   end
-
-#   test "simplify_name should strip a achievement name" do
-# user = User.first
-#     achievement = :test
-
-#     assert_equal user.simplify_name(achievement), :test
-#   end
-
-#   test "simplify_name should strip a points name" do
-#     user = User.first
-#     points = :test
-
-#     assert_equal user.simplify_name(points), :test
-#   end
-
-#   test "levelify_name should add a level name" do
-#     user = User.first
-#     points = :test
-
-#     achievement = :test
-
-#     assert_equal user.levelify_name(points), :test
-
-#     assert_equal user.levelify_name(achievement), :test
-
-#   end
-
-#   test "pointify_name should add a point name" do
-# user = User.first
-#     level = :test
-
-#     achievement = :test
-
-#     assert_equal user.pointify_name(level), :test
-
-#     assert_equal user.pointify_name(achievement), :test
-
-#   end
-
-#   test "achievementify_name should add a level name" do
-#     user = User.first
-#     points = :test
-
-#     level = :test
-
-#     assert_equal user.achievementify_name(points), :test
-#     assert_equal user.achievementify_name(level), :test
-#   end
 
 #   test "can declare toot listeners" do
 #     user = User.first

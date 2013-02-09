@@ -1,7 +1,7 @@
 class TrumpetRuleSheet
   include ActiveModel::Validations
   include ActiveModel::Conversion
-  extend ActiveModel::Naming
+  extend  ActiveModel::Naming
   attr_accessor :trumpet_levels, :trumpet_achievements
 
   def initialize
@@ -10,16 +10,15 @@ class TrumpetRuleSheet
   end
 
   def declare_level(type, rules)
-    level = User.find_or_create_level(type)
+    level  = User.find_or_create_level(type)
     points = User.find_or_create_points(type)
-    @trumpet_levels[level.id] = rules
-
+    @trumpet_levels[level.name] = rules
   end
 
   def declare_achievement(type, rule)
     achievement = User.find_or_create_achievement(type)
-    points = User.find_or_create_points(type)
-    @trumpet_achievements[achievement.id] = rule
+    points      = User.find_or_create_points(type)
+    @trumpet_achievements[achievement.name] = rule
   end
 
   # declare_level(:gnar_level, [5, 10, 20, 50, 100, 200])
