@@ -1,0 +1,44 @@
+Trumpet
+
+Trumpet is a simple, flexible gamification tool for Ruby on Rails.
+
+Using Trumpet's API is as easy! Create a user:
+happy_user = User.new
+
+Now you can create point types and award them:
+happy_user.find_or_create_points(:happiness_points)
+happy_user.find_or_create_points(:excitement_points)
+
+You can now give points:
+happy_user.increase_points(5, :happiness_points)
+happy_user.increase_points(5, :excitement_points)
+
+Take away points:
+happy_user.decrease_points(1, :happiness_points)
+
+And check a user's points at any time:
+happy_user.current_points(:happiness_points)
+=> 4
+happy_user.current_points(:excitement_points)
+=> 5
+
+# TODO - update the TrumpetRuleSheet declaration to whatever we will call trumpet rules
+Now that you have points, you can declare levels:
+happiness_rules = TrumpetRuleSheet.new
+happiness_rules.declare_level(:happiness, [2, 4, 6, 8])
+
+happy_user is currently level 2, because she has 4 happiness_points:
+happy_user.current_level(:happiness)
+=> returns 2
+
+You can also declare achievements:
+happiness_rules.declare_achievement(:excited_user)
+
+Then you can award achievements and verify whether a user has an achievement:
+happy_user.award_achievement(:excited_user)
+happy_user.has_achievement?(:excited_user)
+=> true
+
+Forthcoming features:
+Leader board functionality
+Event listeners
