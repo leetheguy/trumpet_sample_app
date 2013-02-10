@@ -86,15 +86,15 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 1, user.current_level(:test)
   end
 
-#  test "can automatically assign and increase user points and achievements by increasing points" do
-#    user = User.first
-#    user.rule_sheet.declare_level(:test, [20])
-#    user.increase_points(10, :test)
-#    assert_equal 0, user.current_level(:test)
-#    user.increase_points(20, :test)
-#    assert_equal 1, user.current_level(:test)
-#  end
-#
+  test "can automatically assign and increase user points and achievements by increasing points" do
+    user = User.first
+    user.rule_sheet.declare_level(:test, [20])
+    user.increase_points(10, :test)
+    assert_equal 0, user.current_level(:test)
+    user.increase_points(20, :test)
+    assert_equal 1, user.current_level(:test)
+  end
+
   test "can assign achievement with award_acheivement" do
     user = User.first
     assert user.award_achievement(:test_badger)
