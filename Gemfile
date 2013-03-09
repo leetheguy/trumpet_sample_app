@@ -23,6 +23,7 @@ end
 
 group :development, :test do
   gem 'pry'
+  gem 'pry-rails'
   gem 'guard'
 # events for mac
 #  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
@@ -53,3 +54,5 @@ gem 'execjs'
 
 # To use debugger
 # gem 'ruby-debug'
+
+gem 'trumpet', path: '~/Dropbox/works/rails/trumpet_gem'

@@ -1,3 +1,9 @@
+PATH
+  remote: ~/Dropbox/works/rails/trumpet_gem
+  specs:
+    trumpet (0.0.003)
+      rails (~> 3.2.11)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -84,6 +90,8 @@ GEM
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
+    pry-rails (0.2.2)
+      pry (>= 0.9.10)
     rack (1.4.4)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -154,10 +162,12 @@ DEPENDENCIES
   json
   libnotify
   pry
+  pry-rails
   rack-livereload
   rails (= 3.2.11)
   rb-inotify (~> 0.8.8)
   sass-rails (~> 3.2.3)
   sqlite3
   therubyracer
+  trumpet!
   uglifier (>= 1.0.3)

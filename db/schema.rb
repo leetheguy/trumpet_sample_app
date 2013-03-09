@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(:version => 20130202200534) do
 
-  create_table "trumpets", :force => true do |t|
+  create_table "trumpet_rules", :force => true do |t|
     t.string   "name"
     t.integer  "total"
     t.boolean  "acts_as_level",       :default => false
