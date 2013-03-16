@@ -63,20 +63,20 @@ class User < ActiveRecord::Base
 #    end
 #  end
 
-  def self.find_or_create_achievement(type)
-    if (tp = Trumpet.where(acts_as_level: false, acts_as_achievement: true).find_by_name(type))
-      tp
-    else
-      Trumpet.create(name: type, acts_as_achievement: true, total: 0)
-    end
-  end
-
-  def self.find_or_create_level(type)
-    if (tp = Trumpet.where(acts_as_level: true, acts_as_achievement: false).find_by_name(type))
-      tp
-    else
-      Trumpet.create(name: type, acts_as_level: true, total: 0)
-    end
-  end
+#  def self.find_or_create_achievement(type)
+#    if (tp = Trumpet.where(acts_as_level: false, acts_as_achievement: true).find_by_name(type))
+#      tp
+#    else
+#      Trumpet.create(name: type, acts_as_achievement: true, total: 0)
+#    end
+#  end
+#
+#  def self.find_or_create_level(type)
+#    if (tp = Trumpet.where(acts_as_level: true, acts_as_achievement: false).find_by_name(type))
+#      tp
+#    else
+#      Trumpet.create(name: type, acts_as_level: true, total: 0)
+#    end
+#  end
 end
 
